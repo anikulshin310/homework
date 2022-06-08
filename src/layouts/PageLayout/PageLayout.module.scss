@@ -1,0 +1,12 @@
+.page_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: space-around;
+  min-height: 100vh;
+}
+.content_wpapper {
+  display: flex;
+  flex: 1;
+  background-color: #e5e5e5;
+}
