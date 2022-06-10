@@ -1,0 +1,38 @@
+.sidebar_wrapper {
+  display: flex;
+  width: 263px;
+  flex-direction: column;
+
+  .user_item_wrapper {
+    display: flex;
+    background-color: #ffffff;
+    height: 88px;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+.sidebar_menu {
+  padding: 0;
+}
+.menu_item {
+  border-top: 1px solid rgba(42, 47, 55, 0.1);
+  display: flex;
+  background-color: #ffffff;
+  color: #2a2f37;
+  height: 72px;
+  .menu_item_logo {
+    margin-left: 25px;
+    width: 20px;
+  }
+  .menu_item_name {
+    display: flex;
+    margin-left: 12px;
+    align-items: center;
+    font-family: "Jost";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+  }
+}

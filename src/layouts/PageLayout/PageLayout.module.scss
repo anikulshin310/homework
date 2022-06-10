@@ -5,8 +5,30 @@
   justify-content: space-around;
   min-height: 100vh;
 }
-.content_wpapper {
+.content {
   display: flex;
   flex: 1;
+  justify-content: space-around;
   background-color: #e5e5e5;
+}
+.content_wpapper {
+  display: flex;
+  margin-top: 40px;
+}
+@media (min-width: 768px) {
+  .content_wpapper {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .content_wpapper {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .content_wpapper {
+    width: 1170px;
+  }
 }
