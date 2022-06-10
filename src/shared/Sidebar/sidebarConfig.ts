@@ -12,8 +12,7 @@ export const sidebarConfig = [
   {
     id: 2,
     name: "Выход",
-    path: "/",
+    path: "",
     logo: ExitIcon,
   },
 ];
-/* export default BulletinBoardIcon; */

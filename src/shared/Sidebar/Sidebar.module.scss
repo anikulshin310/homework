@@ -7,6 +7,48 @@
     display: flex;
     background-color: #ffffff;
     height: 88px;
+    align-items: center;
+    .user_item_content {
+      display: flex;
+      .user_item_avatar {
+        display: flex;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(42, 47, 55, 0.08);
+        margin-left: 24px;
+
+        .user_item_avatar_text {
+          margin: auto;
+          font-family: "Roboto Slab";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 32px;
+          opacity: 0.4;
+        }
+      }
+
+      .user_item_info {
+        display: flex;
+        margin-left: 16px;
+        flex-direction: column;
+        .user_item_name {
+          font-family: "Jost";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 24px;
+        }
+        .user_item_panel_name {
+          font-family: "Jost";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 16px;
+          opacity: 0.6;
+        }
+      }
+    }
   }
   a {
     text-decoration: none;
@@ -21,6 +63,7 @@
   background-color: #ffffff;
   color: #2a2f37;
   height: 72px;
+
   .menu_item_logo {
     margin-left: 25px;
     width: 20px;
@@ -35,4 +78,15 @@
     font-size: 14px;
     line-height: 24px;
   }
+}
+.menu_item_active {
+  @extend .menu_item;
+  color: #4877f2;
+}
+.menu_item_active_left_border {
+  position: absolute;
+  margin-top: 16px;
+  width: 2px;
+  height: 40px;
+  background-color: #4877f2;
 }
