@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import style from "./UserButton.module.scss";
-import { ReactComponent as UserSVGIcon } from "./icon.svg";
+import userIcon from '../../../../assets/svg/userIcon.svg';
 
 interface IUserButton {
   title: string;
@@ -8,7 +8,11 @@ interface IUserButton {
 const UserButton: FC<IUserButton> = ({ title }) => {
   return (
     <div className={style.user_button}>
-      <UserSVGIcon className={style.user_button_icon} />
+      <div className={style.user_icon} style={{
+          background: `url(${userIcon}) no-repeat center`,
+
+          
+        }}/>
       <div className={style.user_button_title}>{title}</div>
     </div>
   );

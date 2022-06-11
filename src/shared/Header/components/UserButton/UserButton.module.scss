@@ -1,14 +1,18 @@
 .user_button {
   display: flex;
-
   .user_button_title {
-    margin-left: 8px;
+    
     font-family: "Jost";
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
     color: #424242;
-    height: 24px;
+    
   }
+}
+.user_icon {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
 }

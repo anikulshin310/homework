@@ -27,7 +27,10 @@ const SidebarMenuItem: FC<ISidebarMenuItem> = ({ menuItem }) => {
         <div className={style.menu_item_active_left_border}></div>
       ) : null}
       <div className={!isActive ? style.menu_item : style.menu_item_active}>
-        <img className={style.menu_item_logo} src={menuItem.logo}></img>
+        <div  className={!isActive ? style.menu_item_logo : style.menu_item_logo_active} style={{
+          WebkitMask: `url(${menuItem.logo}) no-repeat center `,
+          maskImage: `url(${menuItem.logo}) no-repeat center `,
+        }}/>
         <div className={style.menu_item_name}>{menuItem.name}</div>
       </div>
     </Link>
