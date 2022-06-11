@@ -1,0 +1,20 @@
+.search_input {
+  width: 420px;
+  height: 40px;
+  border: 0;
+  &:focus {
+    outline: none;
+  }
+  padding-left: 16px;
+}
+input::placeholder {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  color: rgb(44, 45, 46);
+  opacity: 0.4;
+}

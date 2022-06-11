@@ -3,7 +3,7 @@ import "./App.css";
 import "./assets/scss/normalize.scss";
 import { Route, Routes } from "react-router-dom";
 import PageLayout from "./layouts/PageLayout";
-import BulletInBoard from "./entities/BulletInBoard/BulletInBoard";
+import BulletInBoard from "./entities/BulletInBoard";
 
 const App = () => {
   return (

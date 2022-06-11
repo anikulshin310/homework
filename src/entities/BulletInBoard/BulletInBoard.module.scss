@@ -1,0 +1,53 @@
+.board_wrapper {
+  display: flex;
+  padding-left: 40px;
+  flex-grow: 1;
+  flex-direction: column;
+}
+.board_top {
+  display: flex;
+  justify-content: space-between;
+  height: 88px;
+  border-bottom: 1px solid rgba(42, 47, 55, 0.1);
+  .board_title {
+    font-family: "Jost";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    display: flex;
+    flex-direction: column;
+    color: #2c2d2e;
+    .board_title_total {
+      font-family: "Jost";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      display: flex;
+      align-items: center;
+      color: #2c2d2e;
+      opacity: 0.6;
+    }
+  }
+  .board_button {
+    width: 129px;
+    height: 40px;
+    background: #4877f2;
+    border-radius: 4px;
+    color: white;
+    font-family: "Jost";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #3a95ff;
+    }
+  }
+}
