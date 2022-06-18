@@ -1,0 +1,25 @@
+.modal_wpapper {
+  position: absolute;
+  z-index: 6;
+  width: 242px;
+  height: 144px;
+  background: #ffffff;
+  border: 1px solid rgba(44, 45, 46, 0.08);
+  left: -212px;
+  top: 32px;
+
+  .item_wrapper:hover {
+    background: rgba(44, 45, 46, 0.04);
+  }
+
+  .modal_menu_item {
+    display: flex;
+    margin-left: 25px;
+    height: 48px;
+    align-items: center;
+  }
+
+  .item_name {
+    margin-left: 18px;
+  }
+}

@@ -14,7 +14,8 @@ interface IBulletInBoardItems {
 
 const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
 
-  const [listItems,setListItems] = useState(items)
+  const [listItems,setListItems] = useState(items);
+  
  
 
   const {
