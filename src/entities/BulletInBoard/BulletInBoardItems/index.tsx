@@ -15,9 +15,7 @@ interface IBulletInBoardItems {
 const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
 
   const [listItems,setListItems] = useState(items)
- /*  useEffect(()=>
-    setListItems([...items].sort((a,b)=>a.date>b.date? 1:-1))
-  ) */
+ 
 
   const {
     totalPages,
@@ -30,13 +28,16 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
   } = usePagination({ contentPerPage: 8, count: listItems.length });
   
 const filterItems = (e:React.ChangeEvent<HTMLInputElement>)=>{
-  const filtered = items.filter((item)=>item.name.toLowerCase().includes(e.target.value.toLowerCase()))
   
-  
-  setListItems(filtered)
   if (e.target.value==='') {
     setPage(1)
     setListItems(items)
+  } 
+  else {
+    const filtered = items.filter((item)=>item.name.toLowerCase().includes(e.target.value.toLowerCase()))
+  
+  
+    setListItems(filtered)
   }
   
   
