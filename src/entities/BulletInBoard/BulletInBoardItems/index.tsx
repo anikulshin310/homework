@@ -29,7 +29,7 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
   
 const filterItems = (e:React.ChangeEvent<HTMLInputElement>)=>{
   
-  if (e.target.value==='') {
+  if (e.target.value===''&& e.target.value.length===0) {
     setPage(1)
     setListItems(items)
   } 
