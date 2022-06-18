@@ -1,0 +1,36 @@
+.pagination_wrapper {
+    
+display: flex;
+font-family: 'Jost';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+color: #2C2D2E;
+.pages_nums {
+    display: flex;
+    align-items: center;
+}
+    .pagesButtons {
+        display: flex;
+        margin: auto;
+        img {
+            margin: auto;
+        }
+        .prevPage {
+            display: flex;
+            width:24px;
+            height:24px;
+        }
+        .nextPage {
+            @extend .prevPage;
+            transform: rotate(180deg);
+            
+        }
+        .active {
+            opacity: 0.6;
+        }
+    }
+
+}
+

@@ -11,7 +11,7 @@ const Sidebar: FC = () => {
       <div className={style.sidebar_menu}>
         <SidebarUserItem currentUser={currentUser} />
         {sidebarConfig.map((menuItem) => {
-          return <SidebarMenuItem menuItem={menuItem} />;
+          return <SidebarMenuItem menuItem={menuItem} key={menuItem.id} />;
         })}
       </div>
     </div>

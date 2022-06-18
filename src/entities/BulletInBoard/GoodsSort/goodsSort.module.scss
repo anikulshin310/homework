@@ -1,0 +1,33 @@
+
+.goods_sort_wrapper {
+    display: flex;
+    height: 40px;
+    margin-top: 24px;
+    background: #FFFFFF;
+   
+}
+.item_name {
+    width: 140px;
+}
+.item_name:first-child {
+    width: 278px;
+}
+
+.goods_sort {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    width: 100%;
+    margin-left: 24px;
+    
+    font-family: 'Jost';
+font-style: normal;
+font-weight: 700;
+font-size: 12px;
+line-height: 16px;
+display: flex;
+align-items: center;
+color: #2C2D2E;
+opacity: 0.6;
+
+}

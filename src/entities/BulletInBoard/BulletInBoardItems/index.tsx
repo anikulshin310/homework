@@ -1,14 +1,23 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, ReactHTMLElement, useEffect, useState } from "react";
 import style from "./BulletInBoardItems.module.scss";
 import { IData } from "../../../mocks/data";
 import SearchInput from "../../../components/SearchInput";
 import usePagination from "../../../hooks/usePagination";
+import Pagination from "../../../components/Pagination";
+import GoodsSort from "../GoodsSort";
+import GoodsItem from "../GoodsItem";
+
 
 interface IBulletInBoardItems {
   items: IData[];
 }
 
 const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
+
+  const [listItems,setListItems] = useState(items)
+ /*  useEffect(()=>
+    setListItems([...items].sort((a,b)=>a.date>b.date? 1:-1))
+  ) */
 
   const {
     totalPages,
@@ -18,25 +27,40 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
     firstContentIndex,
     lastContentIndex,
     page,
-  } = usePagination({ contentPerPage: 6, count: items.length });
+  } = usePagination({ contentPerPage: 8, count: listItems.length });
   
+const filterItems = (e:React.ChangeEvent<HTMLInputElement>)=>{
+  const filtered = items.filter((item)=>item.name.toLowerCase().includes(e.target.value.toLowerCase()))
+  
+  
+  setListItems(filtered)
+  if (e.target.value==='') {
+    setPage(1)
+    setListItems(items)
+  }
+  
+  
+}
+
   return (
     <>
-      
+     
       <div className={style.items_wrapper}>
         <SearchInput
-          onChange={(e) => console.log(e.target.value)}
+          onChange={filterItems}
           placeHolder={"Найти объявление"}
         />
+        <Pagination nextPage={nextPage} prevPage={prevPage} totalPages={totalPages} page={page} firstContentIndex={firstContentIndex} lastContentIndex={lastContentIndex} count={listItems.length}></Pagination>
       </div>
-      <div onClick={prevPage}>prev</div>
-      <div onClick={nextPage}>next</div>
+      <GoodsSort/>
       
-      {items
+     <div className={style.goods_wrapper}>
+      {listItems
     .slice(firstContentIndex, lastContentIndex)
-    .map((el: any) => (
-      <div className="item">{el.name}</div>
+    .map((item: IData) => (
+      <GoodsItem item={item} key={item.name}></GoodsItem>
    ))}
+   </div>
       
     </>
   );
