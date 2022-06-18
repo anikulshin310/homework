@@ -1,18 +1,19 @@
-import React from "react";
+import React, { FC } from "react";
 import style from "./goodsSort.module.scss";
 import { sortConfig } from "./sortConfig";
 import SortIcons from "./SortIcons";
+interface IGoodsSort {
+  onClick: () => void;
+}
 
-const GoodsSort = () => {
+const GoodsSort: FC<IGoodsSort> = ({ onClick }) => {
   return (
     <div className={style.goods_sort_wrapper}>
       <div className={style.goods_sort}>
         {sortConfig.map((item) => (
           <div key={item.name} className={style.item_name}>
             {item.name}
-            {item.sortable ? (
-              <SortIcons sortFunction={() => console.log("sortFunction")} />
-            ) : null}
+            {item.sortable ? <SortIcons onClick={onClick} /> : null}
           </div>
         ))}
       </div>

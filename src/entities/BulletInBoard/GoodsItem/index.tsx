@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useEffect } from "react";
+import React, { FC, useState, useRef, useEffect, useCallback } from "react";
 import style from "./goodsItem.module.scss";
 import dots from "../../../assets/svg/dots.svg";
 import { IData } from "../../../mocks/data";
@@ -21,7 +21,6 @@ const GoodsItem: FC<IGoodsItem> = ({ item }) => {
     document.addEventListener("mousedown", clickOutside);
 
     return () => {
-      // Cleanup the event listener
       document.removeEventListener("mousedown", clickOutside);
     };
   }, [isModal]);

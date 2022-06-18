@@ -12,6 +12,9 @@
 .item_name:first-child {
   width: 278px;
 }
+.item_name:last-child {
+  margin-right: 2px;
+}
 
 .goods_sort {
   display: flex;
@@ -19,7 +22,6 @@
   height: 40px;
   width: 100%;
   margin-left: 24px;
-
   font-family: "Jost";
   font-style: normal;
   font-weight: 700;
