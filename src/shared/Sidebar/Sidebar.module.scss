@@ -67,12 +67,11 @@
   .menu_item_logo {
     margin-left: 25px;
     width: 20px;
-    background-color:grey;
-  
+    background-color: grey;
   }
   .menu_item_logo_active {
     @extend .menu_item_logo;
-    background-color:#4877f2;
+    background-color: #4877f2;
   }
   .menu_item_name {
     display: flex;
@@ -87,8 +86,7 @@
 }
 .menu_item_active {
   @extend .menu_item;
-  color:#4877f2
-  
+  color: #4877f2;
 }
 .menu_item_active_left_border {
   position: absolute;

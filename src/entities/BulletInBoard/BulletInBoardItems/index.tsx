@@ -26,7 +26,7 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
   } = usePagination({ contentPerPage: 8, count: listItems.length });
 
   const filterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === "" && e.target.value.length === 0) {
+    if (e.target.value.trim().length == 0) {
       setPage(1);
       setListItems(items);
     } else {

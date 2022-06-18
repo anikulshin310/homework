@@ -5,5 +5,5 @@ import deleteIcon from "../../assets/svg/delete.svg";
 export const modalConfig = [
   { id: 1, text: "Просмотреть", icon: look },
   { id: 2, text: "Редактировать", icon: edit },
-  {id:3, text:"Удалить", icon:deleteIcon}
+  { id: 3, text: "Удалить", icon: deleteIcon },
 ];
