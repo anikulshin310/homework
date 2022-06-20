@@ -1,4 +1,4 @@
-import React, { FC, ReactHTMLElement, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import style from "./BulletInBoardItems.module.scss";
 import { IData } from "../../../mocks/data";
 import SearchInput from "../../../components/SearchInput";
@@ -60,7 +60,8 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
         deleteItem(listItems, item);
         setListItems([...listItems]);
         break;
-
+      case "look":
+        console.log(item);
       default:
         break;
     }
