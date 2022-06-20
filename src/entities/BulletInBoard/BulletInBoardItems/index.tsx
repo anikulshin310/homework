@@ -62,6 +62,7 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
         break;
       case "look":
         console.log(item);
+        break;
       default:
         break;
     }
