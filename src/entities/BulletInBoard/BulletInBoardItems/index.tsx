@@ -54,6 +54,22 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
     }
   };
 
+  const modalMenuAction = (action: string, item: any) => {
+    switch (action) {
+      case "delete":
+        deleteItem(listItems, item);
+        setListItems([...listItems]);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const deleteItem = (arr: any, item: any) => {
+    setListItems([...arr.splice(arr.indexOf(item), 1)]);
+  };
+
   return (
     <>
       <div className={style.items_wrapper}>
@@ -74,7 +90,11 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
         {listItems
           .slice(firstContentIndex, lastContentIndex)
           .map((item: IData) => (
-            <GoodsItem item={item} key={item.name}></GoodsItem>
+            <GoodsItem
+              item={item}
+              key={item.name}
+              modalMenuAction={modalMenuAction}
+            ></GoodsItem>
           ))}
       </div>
     </>

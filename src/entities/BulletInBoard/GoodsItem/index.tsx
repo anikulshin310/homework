@@ -6,8 +6,9 @@ import Modal from "../../../components/Modal";
 
 interface IGoodsItem {
   item: IData;
+  modalMenuAction: (action: string, item: any) => void;
 }
-const GoodsItem: FC<IGoodsItem> = ({ item }) => {
+const GoodsItem: FC<IGoodsItem> = ({ item, modalMenuAction }) => {
   const [isModal, setIsModal] = useState(false);
   const ref = useRef<any>();
 
@@ -34,7 +35,9 @@ const GoodsItem: FC<IGoodsItem> = ({ item }) => {
         <div className={style.item}>{item.publicated ? "Да" : "Нет"}</div>
         <div className={style.menu_dots} onClick={() => setIsModal(!isModal)}>
           <img src={dots}></img>
-          {isModal ? <Modal></Modal> : null}
+          {isModal ? (
+            <Modal modalMenuAction={modalMenuAction} goodsItem={item}></Modal>
+          ) : null}
         </div>
       </div>
     </div>
