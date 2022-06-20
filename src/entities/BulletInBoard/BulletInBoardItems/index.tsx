@@ -44,14 +44,13 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
         a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0
       );
       setListItems([...sorted]);
-      setSort(!sort);
     } else {
       const sorted = listItems.sort((a, b) =>
         a.name !== b.name ? (a.name < b.name ? 1 : -1) : 0
       );
       setListItems([...sorted]);
-      setSort(!sort);
     }
+    setSort(!sort);
   };
 
   const modalMenuAction = (action: string, item: any) => {
