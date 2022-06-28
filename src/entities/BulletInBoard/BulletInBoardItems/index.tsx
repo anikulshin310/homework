@@ -1,19 +1,29 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import style from "./BulletInBoardItems.module.scss";
 import { IData } from "../../../mocks/data";
+import { useDispatch, useSelector } from 'react-redux';
 import SearchInput from "../../../components/SearchInput";
 import usePagination from "../../../hooks/usePagination";
 import Pagination from "../../../components/Pagination";
 import GoodsSort from "../GoodsSort";
 import GoodsItem from "../GoodsItem";
+import { getGoodsData } from "../../../store/Goods/selectors";
+import { setGoodsDataAction } from "../../../store/Goods/actions";
 
 interface IBulletInBoardItems {
   items: IData[];
 }
 
 const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
+
+  const dispatch = useDispatch();
+  const goodsData = useSelector(getGoodsData);
   const [listItems, setListItems] = useState(items);
   const [sort, setSort] = useState(true);
+  useEffect(()=>{
+  setListItems(goodsData);
+  console.log(goodsData)
+  })
 
   const {
     totalPages,
@@ -68,7 +78,9 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
   };
 
   const deleteItem = (arr: any, item: any) => {
-    setListItems([...arr.splice(arr.indexOf(item), 1)]);
+    /* setListItems([...arr.splice(arr.indexOf(item), 1)]); */
+    dispatch(setGoodsDataAction(item))
+    
   };
 
   return (
