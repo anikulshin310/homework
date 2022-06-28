@@ -11,14 +11,14 @@ import { getGoodsData } from "../../../store/Goods/selectors";
 import { setGoodsDataAction } from "../../../store/Goods/actions";
 
 interface IBulletInBoardItems {
-  items: IData[];
+  item?: IData[];
 }
 
-const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
+const BulletInBoardItems: FC<IBulletInBoardItems> = () => {
 
   const dispatch = useDispatch();
   const goodsData = useSelector(getGoodsData);
-  const [listItems, setListItems] = useState(items);
+  const [listItems, setListItems] = useState(goodsData);
   const [sort, setSort] = useState(true);
   useEffect(()=>{
   setListItems(goodsData);
@@ -38,23 +38,23 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
     if (e.target.value.trim().length == 0) {
       setPage(1);
       setListItems(goodsData);
+     
     } else {
-      const filtered = items.filter((item) =>
-        item.name.toLowerCase().includes(e.target.value.toLowerCase())
-      );
-
-      setListItems([...filtered]);
+      const filtered = goodsData.filter((item:IData) =>
+        item.name.toLowerCase().includes(e.target.value.toLowerCase()));
+        setListItems([...filtered]);
+      
     }
   };
 
   const sortByName = () => {
     if (sort) {
-      const sorted = listItems.sort((a, b) =>
+      const sorted = goodsData.sort((a:IData, b:IData) =>
         a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0
       );
       setListItems([...sorted]);
     } else {
-      const sorted = listItems.sort((a, b) =>
+      const sorted = goodsData.sort((a:IData, b:IData) =>
         a.name !== b.name ? (a.name < b.name ? 1 : -1) : 0
       );
       setListItems([...sorted]);

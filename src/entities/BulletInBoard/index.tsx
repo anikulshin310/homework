@@ -22,7 +22,7 @@ const BulletInBoard: FC = () => {
             onClick={() => console.log("Добавить +")}
           />
         </div>
-        <BulletInBoardItems items={dataItems}></BulletInBoardItems>
+        <BulletInBoardItems></BulletInBoardItems>
       </div>
     </>
   );
