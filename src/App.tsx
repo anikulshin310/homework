@@ -10,7 +10,9 @@ const App = () => {
     <PageLayout>
       <Routes>
         <Route path="/"></Route>
-        <Route path="/bulletin_board" element={<BulletInBoard />}></Route>
+        <Route path="/bulletin_board" element={<BulletInBoard />}>
+          <Route path=":id"></Route>
+        </Route>
       </Routes>
     </PageLayout>
   );

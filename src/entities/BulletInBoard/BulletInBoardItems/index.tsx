@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import style from "./BulletInBoardItems.module.scss";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { IData } from "../../../mocks/data";
 import { useDispatch, useSelector } from 'react-redux';
 import SearchInput from "../../../components/SearchInput";
@@ -8,13 +9,15 @@ import Pagination from "../../../components/Pagination";
 import GoodsSort from "../GoodsSort";
 import GoodsItem from "../GoodsItem";
 import { getGoodsData } from "../../../store/Goods/selectors";
-import { setGoodsDataAction } from "../../../store/Goods/actions";
+import { deleteItem } from "../../../store/Goods/actions";
 
 interface IBulletInBoardItems {
   item?: IData[];
 }
 
 const BulletInBoardItems: FC<IBulletInBoardItems> = () => {
+  const navigate = useNavigate();
+  let [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useDispatch();
   const goodsData = useSelector(getGoodsData);
@@ -22,6 +25,7 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = () => {
   const [sort, setSort] = useState(true);
   useEffect(()=>{
   setListItems(goodsData);
+  console.log(searchParams)
   },[goodsData])
 
   const {
@@ -35,16 +39,20 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = () => {
   } = usePagination({ contentPerPage: 8, count: listItems.length });
 
   const filterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.trim().length == 0) {
+    if (e.target.value.trim().length === 0) {
       setPage(1);
       setListItems(goodsData);
-     
+      const param = searchParams.get('q');
+      searchParams.delete('title');
+      setSearchParams(searchParams)
     } else {
       const filtered = goodsData.filter((item:IData) =>
         item.name.toLowerCase().includes(e.target.value.toLowerCase()));
         setListItems([...filtered]);
+        setSearchParams({title:e.target.value})
       
     }
+    
   };
 
   const sortByName = () => {
@@ -65,21 +73,22 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = () => {
   const modalMenuAction = (action: string, item: any) => {
     switch (action) {
       case "delete":
-        deleteItem(item);
+        dispatch(deleteItem(item));
         
         break;
       case "look":
-        console.log(item);
+        navigate(`id=${item.id}`, { replace: true })
+        
         break;
+        case "edit":
+          navigate(`id=${item.id}?edit`, { replace: true })
+          break;
       default:
         break;
     }
   };
 
-  const deleteItem = (item: any) => {
-    dispatch(setGoodsDataAction(item))
-    
-  };
+ 
 
   return (
     <>
