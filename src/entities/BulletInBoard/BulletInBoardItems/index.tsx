@@ -22,8 +22,7 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
   const [sort, setSort] = useState(true);
   useEffect(()=>{
   setListItems(goodsData);
-  console.log(goodsData)
-  })
+  },[goodsData])
 
   const {
     totalPages,
@@ -38,7 +37,7 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
   const filterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.trim().length == 0) {
       setPage(1);
-      setListItems(items);
+      setListItems(goodsData);
     } else {
       const filtered = items.filter((item) =>
         item.name.toLowerCase().includes(e.target.value.toLowerCase())
@@ -66,8 +65,8 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
   const modalMenuAction = (action: string, item: any) => {
     switch (action) {
       case "delete":
-        deleteItem(listItems, item);
-        setListItems([...listItems]);
+        deleteItem(item);
+        
         break;
       case "look":
         console.log(item);
@@ -77,8 +76,7 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({ items }) => {
     }
   };
 
-  const deleteItem = (arr: any, item: any) => {
-    /* setListItems([...arr.splice(arr.indexOf(item), 1)]); */
+  const deleteItem = (item: any) => {
     dispatch(setGoodsDataAction(item))
     
   };
