@@ -1,30 +1,93 @@
-import React, { FC, useEffect } from "react";
-import style from "./BulletInBoard.module.scss";
-import Button from "../../components/Button";
-import plusSVG from "../../assets/svg/plus.svg";
-import { dataItems } from "../../mocks/data";
-import BulletInBoardItems from "./BulletInBoardItems";
+import React, { FC, useEffect, useState } from 'react';
+import style from './BulletInBoard.module.scss';
+import { dataItems, IData } from '../../mocks/data';
+import GoodsHeader from './GoodsHeader';
+import BulletInBoardItems from './BulletInBoardItems';
+import usePagination from '../../hooks/usePagination';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getGoodsData } from '../../store/Goods/selectors';
+
+import { deleteItem } from '../../store/Goods/actions';
 const BulletInBoard: FC = () => {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const dispatch = useDispatch();
+  const goodsData = useSelector(getGoodsData);
+  const [listItems, setListItems] = useState(goodsData);
+  const [sort, setSort] = useState(true);
+  useEffect(() => {
+    setListItems(goodsData);
+  }, [goodsData]);
+
+  const { totalPages, nextPage, prevPage, setPage, firstContentIndex, lastContentIndex, page } =
+    usePagination({ contentPerPage: 8, count: listItems.length });
+
+  const filterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.trim().length === 0) {
+      setPage(1);
+      setListItems(goodsData);
+
+      searchParams.delete('title');
+      setSearchParams(searchParams);
+    } else {
+      const filtered = goodsData.filter((item: IData) =>
+        item.name.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setListItems([...filtered]);
+      setSearchParams({ title: e.target.value });
+    }
+  };
+
+  const sortByName = () => {
+    if (sort) {
+      const sorted = goodsData.sort((a: IData, b: IData) =>
+        a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0
+      );
+      setListItems([...sorted]);
+    } else {
+      const sorted = goodsData.sort((a: IData, b: IData) =>
+        a.name !== b.name ? (a.name < b.name ? 1 : -1) : 0
+      );
+      setListItems([...sorted]);
+    }
+    setSort(!sort);
+  };
+
+  const modalMenuAction = (action: string, item: IData) => {
+    switch (action) {
+      case 'delete':
+        dispatch(deleteItem(item));
+
+        break;
+      case 'look':
+        navigate(`id=${item}`, { replace: true });
+
+        break;
+      case 'edit':
+        navigate(`id=${item}?edit`, { replace: true });
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
-    <>
-      <div className={style.board_wrapper}>
-        <div className={style.board_top}>
-          <div className={style.board_title}>
-            Объявления
-            <div
-              className={style.board_title_total}
-            >{`Всего: ${dataItems.length}`}</div>
-          </div>
-          <Button
-            className={style.board_button}
-            text={`Добавить`}
-            icon={plusSVG}
-            onClick={() => console.log("Добавить +")}
-          />
-        </div>
-        <BulletInBoardItems></BulletInBoardItems>
-      </div>
-    </>
+    <div className={style.board_wrapper}>
+      <GoodsHeader length={dataItems.length}></GoodsHeader>
+      <BulletInBoardItems
+        items={listItems}
+        filterItems={filterItems}
+        sortByName={sortByName}
+        modalMenuAction={modalMenuAction}
+        nextPage={nextPage}
+        prevPage={prevPage}
+        totalPages={totalPages}
+        page={page}
+        firstContentIndex={firstContentIndex}
+        lastContentIndex={lastContentIndex}></BulletInBoardItems>
+    </div>
   );
 };
 export default BulletInBoard;
