@@ -1,9 +1,10 @@
-import { dataItems } from '../../mocks/data';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { dataItems, IData } from '../../mocks/data';
 import { DELETE_ITEM, ADD_ITEM } from './actions';
 
 const initialState = dataItems;
 
-export const GoodsReducer = (state = initialState, action: any) => {
+export const GoodsReducer = (state = initialState, action: PayloadAction<IData>) => {
   switch (action.type) {
     case DELETE_ITEM:
       return [...state.filter((item) => item !== action.payload)];
