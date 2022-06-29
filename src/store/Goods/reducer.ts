@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { dataItems, IData } from '../../mocks/data';
-import { DELETE_ITEM, ADD_ITEM } from './actions';
+import { DELETE_ITEM, ADD_ITEM, SEARCH_ITEM } from './actions';
 
 const initialState = dataItems;
 

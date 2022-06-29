@@ -4,7 +4,7 @@ interface IButton {
   text: string;
   onClick: () => void;
   className: string;
-  icon: string;
+  icon?: string;
 }
 
 const Button: FC<IButton> = ({ text, onClick, className, icon }) => {

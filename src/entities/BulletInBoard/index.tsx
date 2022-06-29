@@ -8,7 +8,6 @@ import BulletInBoardItems from './BulletInBoardItems';
 import SearchInput from '../../components/SearchInput';
 import Pagination from '../../components/Pagination';
 import usePagination from '../../hooks/usePagination';
-
 import { getGoodsData } from '../../store/Goods/selectors';
 import { addItem, deleteItem } from '../../store/Goods/actions';
 import GoodsSort from './GoodsSort';
@@ -67,10 +66,10 @@ const BulletInBoard: FC = () => {
         dispatch(deleteItem(item));
         break;
       case 'look':
-        navigate(`uuid=${item}`, { replace: true });
+        navigate(`${item.uuid}`, { replace: true });
         break;
       case 'edit':
-        navigate(`uuid=${item}?edit`, { replace: true });
+        navigate(`${item.uuid}?edit`, { replace: true });
         break;
       default:
         break;
