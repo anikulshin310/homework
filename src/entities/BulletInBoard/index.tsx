@@ -9,7 +9,7 @@ import usePagination from '../../hooks/usePagination';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGoodsData } from '../../store/Goods/selectors';
-import { deleteItem } from '../../store/Goods/actions';
+import { addItem, deleteItem } from '../../store/Goods/actions';
 import GoodsSort from './GoodsSort';
 const BulletInBoard: FC = () => {
   const navigate = useNavigate();
@@ -74,7 +74,10 @@ const BulletInBoard: FC = () => {
 
   return (
     <div className={style.board_wrapper}>
-      <GoodsHeader length={listItems.length} />
+      <GoodsHeader
+        length={listItems.length}
+        navigateToAdd={() => navigate(`add`, { replace: true })}
+      />
       <div className={style.board_top}>
         <SearchInput onChange={filterItems} placeHolder="Найти объявление" />
         <Pagination

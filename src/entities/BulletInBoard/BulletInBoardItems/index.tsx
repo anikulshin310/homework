@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import style from './BulletInBoardItems.module.scss';
 import { IData } from '../../../mocks/data';
 import GoodsItem from '../GoodsItem';
