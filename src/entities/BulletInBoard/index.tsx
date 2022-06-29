@@ -31,6 +31,9 @@ const BulletInBoard: FC = () => {
       item.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
     );
     setListItems([...filteredItems]);
+    if (listItems.length < lastContentIndex) {
+      setPage(1);
+    }
     if (e.target.value.trim().length === 0) {
       setPage(1);
       setListItems(goodsData);
