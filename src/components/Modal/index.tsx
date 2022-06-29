@@ -1,10 +1,11 @@
-import React, { FC } from "react";
-import { modalConfig } from "./modalConfig";
-import style from "./modal.module.scss";
+import React, { FC } from 'react';
+import { modalConfig } from './modalConfig';
+import style from './modal.module.scss';
+import { IData } from '../../mocks/data';
 
 interface IModal {
-  modalMenuAction: (action: string, item: any) => void;
-  goodsItem: any;
+  modalMenuAction: (action: string, item: IData) => void;
+  goodsItem: IData;
 }
 const Modal: FC<IModal> = ({ modalMenuAction, goodsItem }) => {
   return (
@@ -13,8 +14,7 @@ const Modal: FC<IModal> = ({ modalMenuAction, goodsItem }) => {
         <div
           key={item.id}
           className={style.item_wrapper}
-          onClick={() => modalMenuAction(item.action, goodsItem)}
-        >
+          onClick={() => modalMenuAction(item.action, goodsItem)}>
           <div className={style.modal_menu_item}>
             <img src={item.icon}></img>
             <div className={style.item_name}>{item.text}</div>

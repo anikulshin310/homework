@@ -2,10 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import { GoodsReducer } from './Goods/reducer';
 
-
 const reducers = {
-  goods:GoodsReducer,
- 
+  goods: GoodsReducer,
 };
 
 const rootReducer = combineReducers(reducers);

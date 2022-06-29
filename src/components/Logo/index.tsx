@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import style from "./Logo.module.scss";
-import { ReactComponent as SVGIcon } from "../../assets/svg/logo.svg";
+import React, { FC } from 'react';
+import style from './Logo.module.scss';
+import { ReactComponent as SVGIcon } from '../../assets/svg/logo.svg';
 
 interface ILogo {
   title: string;

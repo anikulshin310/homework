@@ -1,2 +1,3 @@
-/* import { IDataItems } from './reducer' */
-export const getGoodsData = (state:any) => state.goods;
+import { IData } from '../../mocks/data';
+
+export const getGoodsData = (state: any) => state.goods;

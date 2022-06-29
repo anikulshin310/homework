@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import style from "./pagination.module.scss";
-import pageButton from "../../assets/svg/pageButton.svg";
+import React, { FC } from 'react';
+import style from './pagination.module.scss';
+import pageButton from '../../assets/svg/pageButton.svg';
 
 interface IPagination {
   nextPage: () => void;
@@ -28,26 +28,18 @@ const Pagination: FC<IPagination> = ({
     <div className={style.pagination_wrapper}>
       <div className={style.pages_nums}>
         {!noResults
-          ? `${firstContentIndex + 1}—${
-              !hasNext ? lastContentIndex : count
-            } из ${count}`
+          ? `${firstContentIndex + 1}—${!hasNext ? lastContentIndex : count} из ${count}`
           : `0 из ${count}`}
       </div>
       <div className={style.pagesButtons}>
         <div
-          className={
-            !hasPrev ? `${style.prevPage} ${style.active}` : `${style.prevPage}`
-          }
-          onClick={prevPage}
-        >
+          className={!hasPrev ? `${style.prevPage} ${style.active}` : `${style.prevPage}`}
+          onClick={prevPage}>
           <img src={pageButton}></img>
         </div>
         <div
-          className={
-            hasNext ? `${style.nextPage} ${style.active}` : `${style.nextPage}`
-          }
-          onClick={nextPage}
-        >
+          className={hasNext ? `${style.nextPage} ${style.active}` : `${style.nextPage}`}
+          onClick={nextPage}>
           <img src={pageButton}></img>
         </div>
       </div>

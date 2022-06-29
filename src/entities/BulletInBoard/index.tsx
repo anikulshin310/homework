@@ -1,22 +1,21 @@
 import React, { FC, useEffect, useState } from 'react';
 import style from './BulletInBoard.module.scss';
-import { dataItems, IData } from '../../mocks/data';
+import { IData } from '../../mocks/data';
 import GoodsHeader from './GoodsHeader';
 import BulletInBoardItems from './BulletInBoardItems';
 import usePagination from '../../hooks/usePagination';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGoodsData } from '../../store/Goods/selectors';
-
 import { deleteItem } from '../../store/Goods/actions';
 const BulletInBoard: FC = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const dispatch = useDispatch();
   const goodsData = useSelector(getGoodsData);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [listItems, setListItems] = useState(goodsData);
   const [sort, setSort] = useState(true);
+
   useEffect(() => {
     setListItems(goodsData);
   }, [goodsData]);
@@ -28,29 +27,28 @@ const BulletInBoard: FC = () => {
     if (e.target.value.trim().length === 0) {
       setPage(1);
       setListItems(goodsData);
-
       searchParams.delete('title');
       setSearchParams(searchParams);
     } else {
-      const filtered = goodsData.filter((item: IData) =>
+      const filtered = [...listItems].filter((item: IData) =>
         item.name.toLowerCase().includes(e.target.value.toLowerCase())
       );
-      setListItems([...filtered]);
+      setListItems(filtered);
       setSearchParams({ title: e.target.value });
     }
   };
 
   const sortByName = () => {
     if (sort) {
-      const sorted = goodsData.sort((a: IData, b: IData) =>
+      const sorted = [...listItems].sort((a: IData, b: IData) =>
         a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0
       );
-      setListItems([...sorted]);
+      setListItems(sorted);
     } else {
-      const sorted = goodsData.sort((a: IData, b: IData) =>
+      const sorted = [...listItems].sort((a: IData, b: IData) =>
         a.name !== b.name ? (a.name < b.name ? 1 : -1) : 0
       );
-      setListItems([...sorted]);
+      setListItems(sorted);
     }
     setSort(!sort);
   };
@@ -75,7 +73,7 @@ const BulletInBoard: FC = () => {
 
   return (
     <div className={style.board_wrapper}>
-      <GoodsHeader length={dataItems.length}></GoodsHeader>
+      <GoodsHeader length={listItems.length}></GoodsHeader>
       <BulletInBoardItems
         items={listItems}
         filterItems={filterItems}

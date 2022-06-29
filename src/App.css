@@ -1,16 +1,14 @@
 @font-face {
-  font-family: "Montserrat";
-  src: local("Montserrat"),
-    url(./fonts/Montserrat/Montserrat-Regular.ttf) format("opentype");
+  font-family: 'Montserrat';
+  src: local('Montserrat'), url(./fonts/Montserrat/Montserrat-Regular.ttf) format('opentype');
 }
 
 @font-face {
-  font-family: "Jost";
-  src: local("Jost"), url(./fonts/Jost/Jost-Regular.ttf) format("opentype");
+  font-family: 'Jost';
+  src: local('Jost'), url(./fonts/Jost/Jost-Regular.ttf) format('opentype');
 }
 
 @font-face {
-  font-family: "Roboto Slab";
-  src: local("Jost"),
-    url(./fonts/RobotoSlab/RobotoSlab-VariableFont_wght.ttf) format("opentype");
+  font-family: 'Roboto Slab';
+  src: local('Jost'), url(./fonts/RobotoSlab/RobotoSlab-VariableFont_wght.ttf) format('opentype');
 }
