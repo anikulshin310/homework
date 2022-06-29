@@ -3,18 +3,20 @@ import style from './BulletInBoard.module.scss';
 import { IData } from '../../mocks/data';
 import GoodsHeader from './GoodsHeader';
 import BulletInBoardItems from './BulletInBoardItems';
+import SearchInput from '../../components/SearchInput';
+import Pagination from '../../components/Pagination';
 import usePagination from '../../hooks/usePagination';
-import { useNavigate, useSearchParams, createSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGoodsData } from '../../store/Goods/selectors';
 import { deleteItem } from '../../store/Goods/actions';
+import GoodsSort from './GoodsSort';
 const BulletInBoard: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const goodsData = useSelector(getGoodsData);
   const [searchParams, setSearchParams] = useSearchParams();
   const [listItems, setListItems] = useState(goodsData);
-
   const [sort, setSort] = useState(true);
 
   useEffect(() => {
@@ -72,16 +74,22 @@ const BulletInBoard: FC = () => {
 
   return (
     <div className={style.board_wrapper}>
-      <GoodsHeader length={listItems.length}></GoodsHeader>
+      <GoodsHeader length={listItems.length} />
+      <div className={style.board_top}>
+        <SearchInput onChange={filterItems} placeHolder="Найти объявление" />
+        <Pagination
+          nextPage={nextPage}
+          prevPage={prevPage}
+          totalPages={totalPages}
+          page={page}
+          firstContentIndex={firstContentIndex}
+          lastContentIndex={lastContentIndex}
+          count={listItems.length}></Pagination>
+      </div>
+      <GoodsSort onClick={sortByName} />
       <BulletInBoardItems
         items={listItems}
-        filterItems={filterItems}
-        sortByName={sortByName}
         modalMenuAction={modalMenuAction}
-        nextPage={nextPage}
-        prevPage={prevPage}
-        totalPages={totalPages}
-        page={page}
         firstContentIndex={firstContentIndex}
         lastContentIndex={lastContentIndex}></BulletInBoardItems>
     </div>
