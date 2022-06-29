@@ -14,6 +14,7 @@ const BulletInBoard: FC = () => {
   const goodsData = useSelector(getGoodsData);
   const [searchParams, setSearchParams] = useSearchParams();
   const [listItems, setListItems] = useState(goodsData);
+
   const [sort, setSort] = useState(true);
 
   useEffect(() => {
@@ -24,16 +25,16 @@ const BulletInBoard: FC = () => {
     usePagination({ contentPerPage: 8, count: listItems.length });
 
   const filterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const filteredItems = [...goodsData].filter((item) =>
+      item.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
+    );
+    setListItems([...filteredItems]);
     if (e.target.value.trim().length === 0) {
       setPage(1);
       setListItems(goodsData);
       searchParams.delete('title');
       setSearchParams(searchParams);
     } else {
-      const filtered = [...listItems].filter((item: IData) =>
-        item.name.toLowerCase().includes(e.target.value.toLowerCase())
-      );
-      setListItems(filtered);
       setSearchParams({ title: e.target.value });
     }
   };

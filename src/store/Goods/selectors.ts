@@ -1,3 +1,5 @@
 import { IData } from '../../mocks/data';
-
-export const getGoodsData = (state: any) => state.goods;
+interface IGetGoodsData {
+  goods: IData[];
+}
+export const getGoodsData = (state: IGetGoodsData) => state.goods;
