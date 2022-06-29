@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import style from './BulletInBoard.module.scss';
 import { IData } from '../../mocks/data';
 import GoodsHeader from './GoodsHeader';
@@ -53,15 +53,13 @@ const BulletInBoard: FC = () => {
     setSort(!sort);
   };
 
-  const modalMenuAction = (action: string, item: IData) => {
+  const modalMenuAction = useCallback((action: string, item: IData) => {
     switch (action) {
       case 'delete':
         dispatch(deleteItem(item));
-
         break;
       case 'look':
         navigate(`uuid=${item}`, { replace: true });
-
         break;
       case 'edit':
         navigate(`uuid=${item}?edit`, { replace: true });
@@ -69,7 +67,7 @@ const BulletInBoard: FC = () => {
       default:
         break;
     }
-  };
+  }, []);
 
   return (
     <div className={style.board_wrapper}>
