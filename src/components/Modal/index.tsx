@@ -11,15 +11,16 @@ const Modal: FC<IModal> = ({ modalMenuAction, goodsItem }) => {
   return (
     <div className={style.modal_wpapper}>
       {modalConfig.map((item) => (
-        <div
+        <button
+          type="button"
           key={item.id}
           className={style.item_wrapper}
           onClick={() => modalMenuAction(item.action, goodsItem)}>
           <div className={style.modal_menu_item}>
-            <img src={item.icon}></img>
+            <img src={item.icon} alt={item.action} />
             <div className={style.item_name}>{item.text}</div>
           </div>
-        </div>
+        </button>
       ))}
     </div>
   );

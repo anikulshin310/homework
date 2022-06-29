@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface UsePaginationProps {
   contentPerPage: number;
@@ -31,12 +31,11 @@ const usePagination = ({ contentPerPage, count }: UsePaginationProps) => {
           return state;
         }
         return state + 1;
-      } else {
-        if (state === 1) {
-          return state;
-        }
-        return state - 1;
       }
+      if (state === 1) {
+        return state;
+      }
+      return state - 1;
     });
   };
 

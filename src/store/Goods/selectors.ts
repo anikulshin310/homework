@@ -1,4 +1,5 @@
 import { IData } from '../../mocks/data';
+
 interface IGetGoodsData {
   goods: IData[];
 }

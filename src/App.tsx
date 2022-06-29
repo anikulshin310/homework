@@ -10,9 +10,9 @@ const App = () => {
   return (
     <PageLayout>
       <Routes>
-        <Route path="/"></Route>
-        <Route path="/bulletin_board" element={<BulletInBoard />}></Route>
-        <Route path="/bulletin_board/:uuid" element={<GoodItemDetailed />}></Route>
+        <Route path="/" />
+        <Route path="/bulletin_board" element={<BulletInBoard />} />
+        <Route path="/bulletin_board/:uuid" element={<GoodItemDetailed />} />
       </Routes>
     </PageLayout>
   );

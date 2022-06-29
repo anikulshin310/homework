@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { sidebarConfig } from "./sidebarConfig";
-import style from "./Sidebar.module.scss";
-import { currentUser } from "../../mocks/currentUser";
-import SidebarMenuItem from "./components/SidebarMenuItem";
-import SidebarUserItem from "./components/SidebarUserItem";
+import React, { FC } from 'react';
+import { sidebarConfig } from './sidebarConfig';
+import style from './Sidebar.module.scss';
+import { currentUser } from '../../mocks/currentUser';
+import SidebarMenuItem from './components/SidebarMenuItem';
+import SidebarUserItem from './components/SidebarUserItem';
 
 const Sidebar: FC = () => {
   return (

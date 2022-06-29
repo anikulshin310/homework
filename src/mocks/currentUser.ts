@@ -1,4 +1,4 @@
 export const currentUser = {
-  name: "Super admin",
-  role: "Admin",
+  name: 'Super admin',
+  role: 'Admin',
 };

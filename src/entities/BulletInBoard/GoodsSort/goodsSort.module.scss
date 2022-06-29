@@ -22,7 +22,7 @@
   height: 40px;
   width: 100%;
   margin-left: 24px;
-  font-family: "Jost";
+  font-family: 'Jost';
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
@@ -33,6 +33,8 @@
   opacity: 0.6;
 }
 .sort {
+  border: none;
+  background-color: inherit;
   display: flex;
   width: 8px;
   flex-direction: column;

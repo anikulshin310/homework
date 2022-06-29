@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: space-between;
   margin-left: 24px;
-  font-family: "Jost";
+  font-family: 'Jost';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -40,6 +40,8 @@
 .menu_dots {
   display: flex;
   position: absolute;
+  border: 0;
+  background-color: #ffffff;
   width: 32px;
   height: 32px;
   right: 24px;

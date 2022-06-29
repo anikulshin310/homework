@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import style from "./UserButton.module.scss";
-import userIcon from "../../../../assets/svg/userIcon.svg";
+import React, { FC } from 'react';
+import style from './UserButton.module.scss';
+import userIcon from '../../../../assets/svg/userIcon.svg';
 
 interface IUserButton {
   title: string;

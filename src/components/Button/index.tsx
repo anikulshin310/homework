@@ -4,14 +4,15 @@ interface IButton {
   text: string;
   onClick: () => void;
   className: string;
-  icon?: string;
+  icon: string;
 }
+
 const Button: FC<IButton> = ({ text, onClick, className, icon }) => {
   return (
-    <div className={className} onClick={onClick}>
+    <button type="button" className={className} onClick={onClick}>
       {text}
-      {icon ? <img src={icon}></img> : null}
-    </div>
+      {icon ? <img src={icon} alt={text} /> : null}
+    </button>
   );
 };
 

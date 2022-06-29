@@ -32,16 +32,18 @@ const Pagination: FC<IPagination> = ({
           : `0 из ${count}`}
       </div>
       <div className={style.pagesButtons}>
-        <div
+        <button
+          type="button"
           className={!hasPrev ? `${style.prevPage} ${style.active}` : `${style.prevPage}`}
           onClick={prevPage}>
-          <img src={pageButton}></img>
-        </div>
-        <div
+          <img src={pageButton} alt="prev" />
+        </button>
+        <button
+          type="button"
           className={hasNext ? `${style.nextPage} ${style.active}` : `${style.nextPage}`}
           onClick={nextPage}>
-          <img src={pageButton}></img>
-        </div>
+          <img src={pageButton} alt="next" />
+        </button>
       </div>
     </div>
   );

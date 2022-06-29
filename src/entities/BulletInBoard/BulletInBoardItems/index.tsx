@@ -19,7 +19,7 @@ const BulletInBoardItems: FC<IBulletInBoardItems> = ({
   return (
     <div className={style.goods_wrapper}>
       {items.slice(firstContentIndex, lastContentIndex).map((item: IData) => (
-        <GoodsItem item={item} key={item.name} modalMenuAction={modalMenuAction}></GoodsItem>
+        <GoodsItem item={item} key={item.name} modalMenuAction={modalMenuAction} />
       ))}
     </div>
   );

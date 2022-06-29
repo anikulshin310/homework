@@ -12,11 +12,11 @@ const GoodsHeader: FC<IGoodsHeader> = ({ length, navigateToAdd }) => {
     <div className={style.board_top}>
       <div className={style.board_title}>
         Объявления
-        <div className={style.board_title_total}>{`Всего: ${length}`}</div>
+        <div className={style.board_title_total}>Всего: {length}</div>
       </div>
       <Button
         className={style.board_button}
-        text={`Добавить`}
+        text="Добавить"
         icon={plusSVG}
         onClick={navigateToAdd}
       />

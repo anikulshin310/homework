@@ -1,7 +1,8 @@
-import React, { FC } from "react";
-import style from "./goodsSort.module.scss";
-import { sortConfig } from "./sortConfig";
-import SortIcons from "./SortIcons";
+import React, { FC } from 'react';
+import style from './goodsSort.module.scss';
+import { sortConfig } from './sortConfig';
+import SortIcons from './SortIcons';
+
 interface IGoodsSort {
   onClick: () => void;
 }

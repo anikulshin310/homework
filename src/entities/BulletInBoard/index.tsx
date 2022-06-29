@@ -1,4 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import style from './BulletInBoard.module.scss';
 import { IData } from '../../mocks/data';
 import GoodsHeader from './GoodsHeader';
@@ -6,11 +8,11 @@ import BulletInBoardItems from './BulletInBoardItems';
 import SearchInput from '../../components/SearchInput';
 import Pagination from '../../components/Pagination';
 import usePagination from '../../hooks/usePagination';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { getGoodsData } from '../../store/Goods/selectors';
 import { addItem, deleteItem } from '../../store/Goods/actions';
 import GoodsSort from './GoodsSort';
+
 const BulletInBoard: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -90,14 +92,16 @@ const BulletInBoard: FC = () => {
           page={page}
           firstContentIndex={firstContentIndex}
           lastContentIndex={lastContentIndex}
-          count={listItems.length}></Pagination>
+          count={listItems.length}
+        />
       </div>
       <GoodsSort onClick={sortByName} />
       <BulletInBoardItems
         items={listItems}
         modalMenuAction={modalMenuAction}
         firstContentIndex={firstContentIndex}
-        lastContentIndex={lastContentIndex}></BulletInBoardItems>
+        lastContentIndex={lastContentIndex}
+      />
     </div>
   );
 };
