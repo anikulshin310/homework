@@ -10,11 +10,11 @@ interface IGoodsItem {
 }
 const GoodsItem: FC<IGoodsItem> = ({ item, modalMenuAction }) => {
   const [isModal, setIsModal] = useState(false);
-  const ref = useRef<any>();
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const clickOutside = (e: any) => {
-      if (isModal && ref.current && !ref.current.contains(e.target)) {
+    const clickOutside = (e: MouseEvent) => {
+      if (isModal && ref.current && !ref.current.contains(e.target as Node)) {
         setIsModal(false);
       }
     };
