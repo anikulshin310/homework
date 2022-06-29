@@ -35,8 +35,8 @@ const GoodsItem: FC<IGoodsItem> = ({ item, modalMenuAction }) => {
         <div className={style.item}>{item.publicated ? 'Да' : 'Нет'}</div>
         <button type="button" className={style.menu_dots} onClick={() => setIsModal(!isModal)}>
           <img src={dots} alt="dots" />
-          {isModal ? <Modal modalMenuAction={modalMenuAction} goodsItem={item} /> : null}
         </button>
+        {isModal ? <Modal modalMenuAction={modalMenuAction} goodsItem={item} /> : null}
       </div>
     </div>
   );
