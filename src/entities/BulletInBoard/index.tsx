@@ -4,7 +4,7 @@ import { IData } from '../../mocks/data';
 import GoodsHeader from './GoodsHeader';
 import BulletInBoardItems from './BulletInBoardItems';
 import usePagination from '../../hooks/usePagination';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, createSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGoodsData } from '../../store/Goods/selectors';
 import { deleteItem } from '../../store/Goods/actions';
@@ -60,11 +60,11 @@ const BulletInBoard: FC = () => {
 
         break;
       case 'look':
-        navigate(`id=${item}`, { replace: true });
+        navigate(`uuid=${item}`, { replace: true });
 
         break;
       case 'edit':
-        navigate(`id=${item}?edit`, { replace: true });
+        navigate(`uuid=${item}?edit`, { replace: true });
         break;
       default:
         break;
