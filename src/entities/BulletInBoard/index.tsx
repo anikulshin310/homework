@@ -66,10 +66,10 @@ const BulletInBoard: FC = () => {
         dispatch(deleteItem(item));
         break;
       case 'look':
-        navigate(`${item.uuid}`, { replace: true });
+        navigate(`good/${item.uuid}`, { replace: true });
         break;
       case 'edit':
-        navigate(`${item.uuid}?edit`, { replace: true });
+        navigate(`good/${item.uuid}?edit`, { replace: true });
         break;
       default:
         break;

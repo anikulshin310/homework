@@ -1,31 +1,65 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useReducer, useState } from 'react';
 import { IData } from '../../../../mocks/data';
 import style from './DetailedInfoForm.module.scss';
 import DetailedInput from './DetailedInput';
 
 interface IDetailedInfoForm {
-  item?: IData;
-  editable: boolean;
+  item?: any;
+  edit: boolean;
+  handleInputChange?: (e: any) => void;
 }
 
-const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, editable }) => {
+const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange }) => {
   return (
     <div className={style.form_wrapper}>
-      <div className={style.first_row}>
-        <DetailedInput title="Название товара" value={item?.name} editable={editable} />
+      <DetailedInput
+        title="Название товара"
+        value={item?.name}
+        edit={edit}
+        field="name"
+        onChange={handleInputChange}
+      />
+      <div className={style.row_two_items}>
+        <DetailedInput
+          title="Категория"
+          value={item?.category}
+          edit={edit}
+          field="category"
+          onChange={handleInputChange}
+        />
+        <DetailedInput
+          title="Стоимость"
+          value={item?.price}
+          edit={edit}
+          field="price"
+          onChange={handleInputChange}
+        />
       </div>
-      <div className={style.second_row}>
-        <DetailedInput title="Категория" value={item?.category} editable={editable} />
-        <DetailedInput title="Стоимость" value={item?.price.toString()} editable={editable} />
+      <DetailedInput
+        title="Телефон"
+        value={item?.phone}
+        edit={edit}
+        field="phone"
+        onChange={handleInputChange}
+      />
+      <div className={style.form_input}>
+        <div className={style.form_title}>Описание</div>
+        <textarea
+          disabled={!edit}
+          maxLength={3000}
+          value={item?.description}
+          name="description"
+          onChange={handleInputChange}
+        />
       </div>
-      <div className={style.third_row}>
-        <DetailedInput title="Телефон" value={item?.phone} editable={editable} />
-      </div>
-      <div className={style.fourth_row}>
-        <textarea disabled={!editable} maxLength={3000}>
-          {item?.description}
-        </textarea>
-      </div>
+      <DetailedInput type="file" title="Фотография" edit={edit} />
+      <DetailedInput
+        title="Местоположение"
+        value={item?.coordinates.latitude}
+        edit={edit}
+        field="coordinates"
+        onChange={handleInputChange}
+      />
     </div>
   );
 };

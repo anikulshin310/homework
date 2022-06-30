@@ -12,7 +12,8 @@ const App = () => {
       <Routes>
         <Route path="/" />
         <Route path="/bulletin_board" element={<BulletInBoard />} />
-        <Route path="/bulletin_board/:uuid" element={<GoodItemDetailed />} />
+        <Route path="/bulletin_board/:add" element={<GoodItemDetailed />} />
+        <Route path="/bulletin_board/good/:uuid" element={<GoodItemDetailed />} />
       </Routes>
     </PageLayout>
   );

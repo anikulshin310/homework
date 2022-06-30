@@ -2,16 +2,19 @@ import React, { FC } from 'react';
 import style from './DetailedInfoForm.module.scss';
 
 interface IDetailedInput {
+  type?: string;
+  onChange?: (e: any) => void;
   title: string;
-  value?: string;
-  editable: boolean;
+  value?: string | number;
+  edit: boolean;
+  field?: string;
 }
 
-const DetailedInput: FC<IDetailedInput> = ({ title, value, editable }) => {
+const DetailedInput: FC<IDetailedInput> = ({ type, title, value, edit, onChange, field }) => {
   return (
     <div className={style.form_input}>
       <div className={style.form_title}>{title}</div>
-      <input value={value} disabled={!editable} />
+      <input type={type} value={value} disabled={!edit} onChange={onChange} name={field} />
     </div>
   );
 };

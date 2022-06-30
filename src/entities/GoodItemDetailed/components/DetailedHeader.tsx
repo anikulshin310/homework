@@ -6,9 +6,11 @@ import Button from '../../../components/Button';
 
 interface IDetailedHeader {
   name?: string;
+  editable: boolean;
+  onSave: () => void;
 }
 
-const DetailedHeader: FC<IDetailedHeader> = ({ name }) => {
+const DetailedHeader: FC<IDetailedHeader> = ({ name, editable, onSave }) => {
   const navigate = useNavigate();
   return (
     <div className={style.header_wrapper}>
@@ -23,11 +25,9 @@ const DetailedHeader: FC<IDetailedHeader> = ({ name }) => {
       </div>
       <div className={style.header_bot}>
         <div className={style.header_title}>{name}</div>
-        <Button
-          className={style.header_button}
-          text="Сохранить"
-          onClick={() => console.log('сохранить')}
-        />
+        {editable ? (
+          <Button className={style.header_button} text="Сохранить" onClick={onSave} />
+        ) : null}
       </div>
     </div>
   );
