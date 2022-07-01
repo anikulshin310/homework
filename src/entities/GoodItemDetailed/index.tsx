@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
+import { addItem } from '../../store/Goods/actions';
 import { getGoodsData } from '../../store/Goods/selectors';
 import DetailedHeader from './components/DetailedHeader';
 import DetailedInfoForm from './components/DetailedInfoForm';
@@ -12,6 +13,7 @@ const GoodItemDetailed: FC = () => {
   const goodsData = useSelector(getGoodsData);
   const detailedItem = goodsData.find((item) => item.uuid === params.uuid);
   const [editable, setEditable] = useState(false);
+  const storeDispatch = useDispatch();
 
   const initialState = {
     name: detailedItem?.name,
@@ -19,9 +21,13 @@ const GoodItemDetailed: FC = () => {
     price: detailedItem?.price,
     phone: detailedItem?.phone,
     description: detailedItem?.description,
+    date:detailedItem?.date,
     coordinates: {
       latitude: detailedItem?.coordinates.latitude,
+      longtitude: detailedItem?.coordinates.longtitude,
     },
+    publicated:detailedItem?.publicated,
+    uuid:"sdsdsdsd"
   };
 
   const reducer = (state = initialState, action: any) => {
@@ -61,7 +67,7 @@ const GoodItemDetailed: FC = () => {
       <DetailedHeader
         editable={editable}
         name={currentItem?.name}
-        onSave={() => console.log(currentItem)}
+        onSave={()=>storeDispatch(addItem(currentItem))}
       />
       <DetailedInfoForm item={currentItem} edit={editable} handleInputChange={handleInputChange} />
     </div>
