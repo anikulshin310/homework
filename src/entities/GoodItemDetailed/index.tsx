@@ -48,6 +48,14 @@ const GoodItemDetailed: FC = () => {
       payload: e.target.value,
     });
   };
+  const onSave = ()=>{
+    if (params.add === 'add') {
+      storeDispatch(addItem(currentItem))
+    }
+    else {
+      storeDispatch(editItem(currentItem))
+    }
+  }
   useEffect(() => {
     if (editable) {
       setCurrentItem(state);
@@ -67,7 +75,7 @@ const GoodItemDetailed: FC = () => {
       <DetailedHeader
         editable={editable}
         name={currentItem?.name}
-        onSave={() => storeDispatch(editItem(currentItem))}
+        onSave={onSave}
       />
       <DetailedInfoForm item={currentItem} edit={editable} handleInputChange={handleInputChange} />
     </div>
