@@ -11,7 +11,7 @@ export const GoodsReducer = (state = initialState, action: PayloadAction<IData>)
     case ADD_ITEM:
       return [action.payload, ...state];
     case EDIT_ITEM:
-      return [...state.map((n) => (n.uuid == action.payload.uuid ? action.payload : n))];
+      return [...state.map((item) => (item.uuid == action.payload.uuid ? action.payload : item))];
 
     default:
       return state;
