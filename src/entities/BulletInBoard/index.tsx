@@ -29,7 +29,7 @@ const BulletInBoard: FC = () => {
 
   const filterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
     const filteredItems = [...goodsData].filter((item) =>
-      item.name.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
+      item.name?.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
     );
     setListItems([...filteredItems]);
     if (listItems.length < lastContentIndex) {
@@ -45,7 +45,7 @@ const BulletInBoard: FC = () => {
     }
   };
 
-  const sortByName = () => {
+  /* const sortByName = () => {
     if (sort) {
       const sorted = [...listItems].sort((a: IData, b: IData) =>
         a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0
@@ -58,7 +58,7 @@ const BulletInBoard: FC = () => {
       setListItems(sorted);
     }
     setSort(!sort);
-  };
+  }; */
 
   const modalMenuAction = useCallback((action: string, item: IData) => {
     switch (action) {
@@ -94,7 +94,7 @@ const BulletInBoard: FC = () => {
           count={listItems.length}
         />
       </div>
-      <GoodsSort onClick={sortByName} />
+      <GoodsSort onClick={() => console.log('fix sort')} />
       <BulletInBoardItems
         items={listItems}
         modalMenuAction={modalMenuAction}
