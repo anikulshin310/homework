@@ -1,16 +1,16 @@
 export interface IData {
-  name: string | undefined;
-  date: string | undefined;
-  category: string | undefined;
-  publicated: boolean | undefined;
-  phone: string | undefined;
-  price: number | undefined;
-  description: string | undefined;
+  name: string;
+  date: string;
+  category: string;
+  publicated: boolean;
+  phone: string;
+  price: number;
+  description: string;
   coordinates: {
-    latitude: number | undefined;
-    longtitude: number | undefined;
+    latitude: number;
+    longtitude: number;
   };
-  uuid: string | undefined;
+  uuid: string;
 }
 
 export const dataItems: IData[] = [

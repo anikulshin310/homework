@@ -11,7 +11,7 @@ export const addItem = (payload: IData) => {
   return { type: ADD_ITEM, payload };
 };
 
-export const EDIT_ITEM = 'EDIT_ITEM';
-export const editItem = (payload: IData) => {
-  return { type: EDIT_ITEM, payload };
+export const SEARCH_ITEM = 'SEARCH_ITEM';
+export const searchItem = (payload: IData) => {
+  return { type: SEARCH_ITEM, payload };
 };

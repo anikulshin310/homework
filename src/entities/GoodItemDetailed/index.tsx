@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
-import { addItem, editItem } from '../../store/Goods/actions';
 import { getGoodsData } from '../../store/Goods/selectors';
 import DetailedHeader from './components/DetailedHeader';
 import DetailedInfoForm from './components/DetailedInfoForm';
@@ -13,7 +12,6 @@ const GoodItemDetailed: FC = () => {
   const goodsData = useSelector(getGoodsData);
   const detailedItem = goodsData.find((item) => item.uuid === params.uuid);
   const [editable, setEditable] = useState(false);
-  const storeDispatch = useDispatch();
 
   const initialState = {
     name: detailedItem?.name,
@@ -21,18 +19,17 @@ const GoodItemDetailed: FC = () => {
     price: detailedItem?.price,
     phone: detailedItem?.phone,
     description: detailedItem?.description,
-    date: detailedItem?.date,
     coordinates: {
       latitude: detailedItem?.coordinates.latitude,
-      longtitude: detailedItem?.coordinates.longtitude,
     },
-    publicated: detailedItem?.publicated,
     uuid: detailedItem?.uuid,
   };
 
   const reducer = (state = initialState, action: any) => {
     switch (action.type) {
       case 'HANDLE_INPUT_TEXT':
+        return { ...state, [action.field]: action.payload };
+      case 'HANDLE_UUID':
         return { ...state, [action.field]: action.payload };
 
       default:
@@ -48,17 +45,25 @@ const GoodItemDetailed: FC = () => {
       payload: e.target.value,
     });
   };
-  const onSave = ()=>{
+
+  const onSave = () => {
     if (params.add === 'add') {
-      storeDispatch(addItem(currentItem))
+      storeDispatch(addItem(currentItem));
+    } else {
+      storeDispatch(editItem(currentItem));
     }
-    else {
-      storeDispatch(editItem(currentItem))
-    }
+  };
+  function generateUuid(): string {
+    return 'xxxx-xxxx-xxx-xxxx'.replace(/[x]/g, (c) => {
+      const r = Math.floor(Math.random() * 16);
+      return r.toString(16);
+    });
   }
+
   useEffect(() => {
     if (editable) {
       setCurrentItem(state);
+      console.log(state);
     }
   }, [state]);
 
@@ -68,14 +73,19 @@ const GoodItemDetailed: FC = () => {
     }
     if (params.add === 'add') {
       setEditable(true);
+      dispatch({
+        type: 'HANDLE_UUID',
+        field: 'uuid',
+        payload: generateUuid(),
+      });
     }
-  }, [location]);
+  }, [params, location]);
   return (
     <div className={style.detailed_wrapper}>
       <DetailedHeader
         editable={editable}
         name={currentItem?.name}
-        onSave={onSave}
+        onSave={() => console.log(currentItem)}
       />
       <DetailedInfoForm item={currentItem} edit={editable} handleInputChange={handleInputChange} />
     </div>
