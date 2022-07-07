@@ -79,11 +79,42 @@ const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange
         name="coordinates"
         onChange={handleInputChange}
       />
+      {item.coordinates.longtitude ? (
+        <div className={style.form_input}>
+          <DetailedInfoMap
+            latitude={item?.coordinates.latitude}
+            longtitude={item?.coordinates.longtitude}
+          />
+        </div>
+      ) : null}
       <div className={style.form_input}>
-        <DetailedInfoMap
-          latitude={item?.coordinates.latitude}
-          longtitude={item?.coordinates.longtitude}
-        />
+        <div className={style.form_title}>Публикация</div>
+        <div className={style.publicated}>
+          <label id="contactChoice1" htmlFor="contactChoice1">
+            <div className={style.radio}>
+              <input
+                type="radio"
+                id="contactChoice1"
+                name="publicated"
+                value="true"
+                defaultChecked={item?.publicated}
+                onChange={handleInputChange}
+              />
+              <div className={style.radio_title}>Показать</div>
+            </div>
+            <div className={style.radio}>
+              <input
+                type="radio"
+                id="contactChoice2"
+                name="publicated"
+                value="false"
+                defaultChecked={!item?.publicated}
+                onChange={handleInputChange}
+              />
+              <div className={style.radio_title}>Скрыть</div>
+            </div>
+          </label>
+        </div>
       </div>
     </div>
   );
