@@ -18,7 +18,7 @@ const DetailedHeader: FC<IDetailedHeader> = ({ name, editable, onSave }) => {
         <button
           className={style.arrow_button}
           type="button"
-          onClick={() => navigate('../bulletin_board')}>
+          onClick={() => navigate('/bulletin_board')}>
           <img src={arrow} alt="arrow" />
           <div className={style.arrow_button_text}>Вернуться назад</div>
         </button>

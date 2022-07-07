@@ -1,5 +1,7 @@
+import { YMaps } from '@pbe/react-yandex-maps';
 import React, { FC, useEffect, useReducer, useState } from 'react';
 import { IData } from '../../../../mocks/data';
+import DetailedInfoMap from '../YMaps';
 import style from './DetailedInfoForm.module.scss';
 import DetailedInput from './DetailedInput';
 
@@ -60,6 +62,12 @@ const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange
         field="coordinates"
         onChange={handleInputChange}
       />
+      <div className={style.form_input}>
+        <DetailedInfoMap
+          latitude={item?.coordinates.latitude}
+          longtitude={item?.coordinates.longtitude}
+        />
+      </div>
     </div>
   );
 };
