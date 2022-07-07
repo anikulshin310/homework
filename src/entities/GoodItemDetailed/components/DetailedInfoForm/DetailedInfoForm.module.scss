@@ -27,6 +27,7 @@ textarea {
 }
 .form_input {
   display: flex;
+  justify-content: space-between;
   flex-grow: 1;
   flex-direction: column;
   margin-top: 24px;
@@ -45,7 +46,8 @@ textarea {
     color: #2a2f37;
     opacity: 0.6;
   }
-  input {
+  input,
+  select {
     height: 64px;
     background: rgba(42, 47, 55, 0.02);
     margin-top: 8px;
@@ -57,7 +59,6 @@ textarea {
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    /* identical to box height, or 150% */
     display: flex;
     align-items: center;
 

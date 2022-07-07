@@ -9,7 +9,7 @@ import SearchInput from '../../components/SearchInput';
 import Pagination from '../../components/Pagination';
 import usePagination from '../../hooks/usePagination';
 import { getGoodsData } from '../../store/Goods/selectors';
-import { addItem, deleteItem } from '../../store/Goods/actions';
+import { deleteItem } from '../../store/Goods/actions';
 import GoodsSort from './GoodsSort';
 
 const BulletInBoard: FC = () => {
@@ -28,6 +28,7 @@ const BulletInBoard: FC = () => {
     usePagination({ contentPerPage: 8, count: listItems.length });
 
   const filterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPage(1);
     const filteredItems = [...goodsData].filter((item) =>
       item.name?.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
     );
@@ -45,14 +46,14 @@ const BulletInBoard: FC = () => {
     }
   };
 
-  /* const sortByName = () => {
+  /* const sortByName = (array:IData[],sort:boolean) => {
     if (sort) {
-      const sorted = [...listItems].sort((a: IData, b: IData) =>
+      const sorted = [...array].sort((a, b) =>
         a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0
       );
       setListItems(sorted);
     } else {
-      const sorted = [...listItems].sort((a: IData, b: IData) =>
+      const sorted = [...array].sort((a: IData, b: IData) =>
         a.name !== b.name ? (a.name < b.name ? 1 : -1) : 0
       );
       setListItems(sorted);

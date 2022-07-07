@@ -7,14 +7,14 @@ interface IDetailedInput {
   title: string;
   value?: string | number;
   edit: boolean;
-  field?: string;
+  name?: string;
 }
 
-const DetailedInput: FC<IDetailedInput> = ({ type, title, value, edit, onChange, field }) => {
+const DetailedInput: FC<IDetailedInput> = ({ type, title, value, edit, onChange, name }) => {
   return (
     <div className={style.form_input}>
       <div className={style.form_title}>{title}</div>
-      <input type={type} value={value} disabled={!edit} onChange={onChange} name={field} />
+      <input type={type} value={value} disabled={!edit} onChange={onChange} name={name} />
     </div>
   );
 };

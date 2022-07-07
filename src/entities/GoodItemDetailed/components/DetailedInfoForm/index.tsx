@@ -1,9 +1,10 @@
-import { YMaps } from '@pbe/react-yandex-maps';
-import React, { FC, useEffect, useReducer, useState } from 'react';
-import { IData } from '../../../../mocks/data';
+import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import DetailedInput from './DetailedInput';
+import { getGoodsData } from '../../../../store/Goods/selectors';
+
 import DetailedInfoMap from '../YMaps';
 import style from './DetailedInfoForm.module.scss';
-import DetailedInput from './DetailedInput';
 
 interface IDetailedInfoForm {
   item?: any;
@@ -12,28 +13,44 @@ interface IDetailedInfoForm {
 }
 
 const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange }) => {
+  const goodsData = useSelector(getGoodsData);
+  const categories = Array.from(new Set(goodsData.map((good) => good.category)));
   return (
     <div className={style.form_wrapper}>
       <DetailedInput
         title="Название товара"
         value={item?.name}
         edit={edit}
-        field="name"
+        name="name"
         onChange={handleInputChange}
       />
       <div className={style.row_two_items}>
-        <DetailedInput
-          title="Категория"
-          value={item?.category}
-          edit={edit}
-          field="category"
-          onChange={handleInputChange}
-        />
+        {!edit ? (
+          <DetailedInput
+            title="Категория"
+            value={item?.category}
+            edit={edit}
+            name="category"
+            onChange={handleInputChange}
+          />
+        ) : (
+          <div className={style.form_input}>
+            <div className={style.form_title}>Категория</div>
+            <select value={item?.category} name="category" onChange={handleInputChange}>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         <DetailedInput
           title="Стоимость"
           value={item?.price}
           edit={edit}
-          field="price"
+          name="price"
           onChange={handleInputChange}
         />
       </div>
@@ -41,7 +58,7 @@ const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange
         title="Телефон"
         value={item?.phone}
         edit={edit}
-        field="phone"
+        name="phone"
         onChange={handleInputChange}
       />
       <div className={style.form_input}>
@@ -59,7 +76,7 @@ const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange
         title="Местоположение"
         value={item?.coordinates.latitude}
         edit={edit}
-        field="coordinates"
+        name="coordinates"
         onChange={handleInputChange}
       />
       <div className={style.form_input}>
