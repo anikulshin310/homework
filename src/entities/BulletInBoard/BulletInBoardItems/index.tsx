@@ -5,6 +5,7 @@ import GoodsItem from '../GoodsItem';
 
 interface IBulletInBoardItems {
   items: IData[];
+
   modalMenuAction: (action: string, item: IData) => void;
   firstContentIndex: number;
   lastContentIndex: number;

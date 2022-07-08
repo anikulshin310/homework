@@ -77,16 +77,16 @@ const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange
       <DetailedInput type="file" title="Фотография" edit={edit} />
       <DetailedInput
         title="Местоположение"
-        value={item?.coordinates.latitude}
+        value={item?.coordinates?.latitude}
         edit={edit}
         name="coordinates"
         onChange={handleInputChange}
       />
-      {item.coordinates.longtitude ? (
+      {item?.coordinates?.longtitude ? (
         <div className={style.form_input}>
           <DetailedInfoMap
-            latitude={item?.coordinates.latitude}
-            longtitude={item?.coordinates.longtitude}
+            latitude={item?.coordinates?.latitude}
+            longtitude={item?.coordinates?.longtitude}
           />
         </div>
       ) : null}

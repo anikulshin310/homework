@@ -21,7 +21,7 @@ const SidebarMenuItem: FC<ISidebarMenuItem> = ({ menuItem }) => {
     } else {
       setIsActive(false);
     }
-  });
+  }, [location.pathname, menuItem.path]);
   return (
     <Link to={menuItem.path} key={`${menuItem.id}:${menuItem.name}`}>
       {/* Вот тут корректнее такая запись: isActive && <div ... /> . 

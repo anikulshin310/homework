@@ -22,6 +22,7 @@ const BulletInBoard: FC = () => {
 
   useEffect(() => {
     setListItems(goodsData);
+    console.log(listItems);
   }, [goodsData]);
 
   const { totalPages, nextPage, prevPage, setPage, firstContentIndex, lastContentIndex, page } =
