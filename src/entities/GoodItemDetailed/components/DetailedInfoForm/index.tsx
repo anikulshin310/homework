@@ -11,7 +11,7 @@ interface IDetailedInfoForm {
   edit: boolean;
   handleInputChange?: (e: any) => void;
 }
-
+// Очень толстый компонент, надо пилить на подкомпоненты.
 const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange }) => {
   const goodsData = useSelector(getGoodsData);
   const categories = Array.from(new Set(goodsData.map((good) => good.category)));
@@ -25,6 +25,7 @@ const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange
         onChange={handleInputChange}
       />
       <div className={style.row_two_items}>
+        {/* Вот эту штуку ниже точно можно в отдельный компонент вынести, куда флаг edit будет прокидывать и уже внутри компонента сравнивать. Ну и нужные пропсы прокинешь соовтетственно */}
         {!edit ? (
           <DetailedInput
             title="Категория"

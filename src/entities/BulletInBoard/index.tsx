@@ -27,6 +27,7 @@ const BulletInBoard: FC = () => {
   const { totalPages, nextPage, prevPage, setPage, firstContentIndex, lastContentIndex, page } =
     usePagination({ contentPerPage: 8, count: listItems.length });
 
+  // С филтрацией и пагинацией тебе тут поковырять надо, не всегда нормально работает. Советую еще поглядеть какие-нибудь реализации
   const filterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPage(1);
     const filteredItems = [...goodsData].filter((item) =>

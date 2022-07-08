@@ -15,6 +15,7 @@ interface UsePaginationReturn {
   setPage: (page: number) => void;
 }
 
+// интерфейс для возвращаемого значение описал, но забыл юзнуть: const usePagination = ({ contentPerPage, count }: UsePaginationProps): UsePaginationReturn => ...
 const usePagination = ({ contentPerPage, count }: UsePaginationProps) => {
   const [page, setPage] = useState(1);
 

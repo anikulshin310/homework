@@ -14,6 +14,7 @@ const GoodsSort: FC<IGoodsSort> = ({ onClick }) => {
         {sortConfig.map((item) => (
           <div key={item.name} className={style.item_name}>
             {item.name}
+            {/* items.sortable && <SortIcons.../> */}
             {item.sortable ? <SortIcons onClick={onClick} /> : null}
           </div>
         ))}
