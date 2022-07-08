@@ -15,7 +15,7 @@ const GoodsSort: FC<IGoodsSort> = ({ onClick }) => {
           <div key={item.name} className={style.item_name}>
             {item.name}
             {/* items.sortable && <SortIcons.../> */}
-            {item.sortable ? <SortIcons onClick={onClick} /> : null}
+            {item.sortable && <SortIcons onClick={onClick} />}
           </div>
         ))}
       </div>
