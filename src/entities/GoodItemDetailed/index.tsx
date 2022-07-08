@@ -15,6 +15,10 @@ const GoodItemDetailed: FC = () => {
   const detailedItem = goodsData.find((item) => item.uuid === params.uuid);
   const [editable, setEditable] = useState(false);
 
+  // Стор обязательно вынести надо туда, где ему место, да и в целом подумать еще раз над вот этим подходом,
+  // что ты берешь данные из стора, как-то их обрабатываешь и создаешь на основании этого новый стор по сути
+  // (новый редьюсер). Можно тут без стора лучше обойдить в таком случае, а всю логику фильтрации сделать
+  // в селекторе, и вернуть нужное значение в компонент
   const initialState = {
     name: detailedItem?.name,
     category: detailedItem?.category,
@@ -57,6 +61,7 @@ const GoodItemDetailed: FC = () => {
       storeDispatch(editItem(currentItem));
     }
   };
+  // у тебя уже есть на это дело утилка
   function generateUuid(): string {
     return 'xxxx-xxxx-xxx-xxxx'.replace(/[x]/g, (c) => {
       const r = Math.floor(Math.random() * 16);
