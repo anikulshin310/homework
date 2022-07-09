@@ -3,8 +3,9 @@ import { IData } from '../../mocks/data';
 export interface IGetGoodsData {
   goods: {
     goods: IData[];
-    currentGood: IData;
   };
+
+  currentGood: IData;
 }
 export const getGoodsData = (state: IGetGoodsData) => state.goods.goods;
-export const getCurrentGood = (state: IGetGoodsData) => state.goods.currentGood;
+export const getCurrentGood = (state: IGetGoodsData) => state.currentGood;

@@ -2,7 +2,14 @@ import React, { FC, useEffect, useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { IData } from '../../mocks/data';
-import { addItem, editItem, setCurrentItem } from '../../store/Goods/actions';
+import {
+  addItem,
+  clearCurrent,
+  editItem,
+  handleInputText,
+  handleUuid,
+  setCurrentItem,
+} from '../../store/Goods/actions';
 import { getCurrentGood } from '../../store/Goods/selectors';
 import { generateUuid } from '../../utils/generateUuid';
 import DetailedHeader from './components/DetailedHeader';
@@ -24,53 +31,34 @@ const GoodItemDetailed: FC = () => {
   // (новый редьюсер). Можно тут без стора лучше обойдить в таком случае, а всю логику фильтрации сделать
   // в селекторе, и вернуть нужное значение в компонент
 
-  const reducer = (state = currentItem, action: any) => {
-    switch (action.type) {
-      case 'HANDLE_INPUT_TEXT':
-        return { ...state, [action.field]: action.payload };
-      case 'HANDLE_UUID':
-        return { ...state, [action.field]: action.payload };
-
-      default:
-        return state;
-    }
-  };
-  const [state, dispatch] = useReducer(reducer, currentItem);
-
   const handleInputChange = (e: any) => {
-    dispatch({
-      type: 'HANDLE_INPUT_TEXT',
-      field: e.target.name,
-      payload: e.target.value,
-    });
+    storeDispatch(handleInputText(e.target.value, e.target.name));
   };
 
   const onSave = () => {
     if (params.add === 'add') {
-      storeDispatch(addItem(state));
+      storeDispatch(addItem(cGood));
     } else {
-      storeDispatch(editItem(state));
+      storeDispatch(editItem(cGood));
     }
+    storeDispatch(clearCurrent());
   };
 
   useEffect(() => {
+    setEditable(true);
     if (location.search === '?edit') {
-      setEditable(true);
+      /* storeDispatch(setCurrentItem(currentItem)); */
+      storeDispatch(setCurrentItem(currentItem));
     }
     if (params.add === 'add') {
-      setEditable(true);
-      dispatch({
-        type: 'HANDLE_UUID',
-        field: 'uuid',
-        payload: generateUuid(),
-      });
+      storeDispatch(handleUuid(generateUuid(), 'uuid'));
+      storeDispatch(setCurrentItem(currentItem));
     }
-    storeDispatch(setCurrentItem(currentItem));
   }, [params, location]);
   return (
     <div className={style.detailed_wrapper}>
-      <DetailedHeader editable={editable} name={state?.name} onSave={onSave} />
-      <DetailedInfoForm item={state} edit={editable} handleInputChange={handleInputChange} />
+      <DetailedHeader editable={editable} name={cGood?.name} onSave={onSave} />
+      <DetailedInfoForm item={cGood} edit={editable} handleInputChange={handleInputChange} />
     </div>
   );
 };

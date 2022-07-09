@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import { combineReducers } from 'redux';
-import { GoodsReducer } from './Goods/reducer';
+import { currentGoodReducer } from './Goods/currentGoodReducer';
+import { GoodsReducer } from './Goods/goodsReducer';
 
 const reducers = {
   goods: GoodsReducer,
+  currentGood: currentGoodReducer,
 };
 
 const rootReducer = combineReducers(reducers);

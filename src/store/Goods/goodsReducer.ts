@@ -15,7 +15,6 @@ import {
 // Так легче будет стор расширять в дальнейшем
 const initialState = {
   goods: dataItems,
-  currentGood: {} as IData,
 };
 
 export const GoodsReducer = (state = initialState, action: PayloadAction<IData>) => {
@@ -35,7 +34,7 @@ export const GoodsReducer = (state = initialState, action: PayloadAction<IData>)
       return state;
   }
 };
-export const currentGoodReducer = (state = initialState.currentGood, action: any) => {
+/* export const currentGoodReducer = (state = initialState.currentGood, action: any) => {
   switch (action.type) {
     case SET_CURRENT:
       return { ...state, state: action.payload };
@@ -47,4 +46,4 @@ export const currentGoodReducer = (state = initialState.currentGood, action: any
     default:
       return state;
   }
-};
+}; */
