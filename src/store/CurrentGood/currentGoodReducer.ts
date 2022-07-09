@@ -1,5 +1,6 @@
 import { IData } from '../../mocks/data';
-import { HANDLE_INPUT_TEXT, HANDLE_UUID, SET_CURRENT, CLEAR_CURRENT } from './actions';
+
+import { CLEAR_CURRENT, HANDLE_INPUT_TEXT, HANDLE_UUID, SET_CURRENT } from './actions';
 
 const initialState = {
   currentGood: {} as IData,

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import DetailedInput from './DetailedInput';
-import { getGoodsData } from '../../../../store/Goods/selectors';
+import { getGoodsCategories, getGoodsData } from '../../../../store/Goods/selectors';
 
 import DetailedInfoMap from '../YMaps';
 import style from './DetailedInfoForm.module.scss';
@@ -14,7 +14,7 @@ interface IDetailedInfoForm {
 // Очень толстый компонент, надо пилить на подкомпоненты.
 const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange }) => {
   const goodsData = useSelector(getGoodsData);
-  const categories = Array.from(new Set(goodsData.map((good) => good.category)));
+  const categories = useSelector(getGoodsCategories);
   return (
     <div className={style.form_wrapper}>
       <DetailedInput

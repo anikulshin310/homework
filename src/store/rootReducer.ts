@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { combineReducers } from 'redux';
-import { currentGoodReducer } from './Goods/currentGoodReducer';
+import { currentGoodReducer } from './CurrentGood/currentGoodReducer';
 import { GoodsReducer } from './Goods/goodsReducer';
 
 const reducers = {

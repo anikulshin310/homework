@@ -1,15 +1,14 @@
-import React, { FC, useEffect, useReducer, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import { IData } from '../../mocks/data';
 import {
-  addItem,
   clearCurrent,
-  editItem,
   handleInputText,
   handleUuid,
   setCurrentItem,
-} from '../../store/Goods/actions';
+} from '../../store/CurrentGood/actions';
+import { addItem, editItem } from '../../store/Goods/actions';
 import { getCurrentGood } from '../../store/Goods/selectors';
 import { generateUuid } from '../../utils/generateUuid';
 import DetailedHeader from './components/DetailedHeader';
@@ -19,7 +18,7 @@ import style from './GoodItemDetailed.module.scss';
 const GoodItemDetailed: FC = () => {
   const location = useLocation();
   const params = useParams();
-  const cGood = useSelector(getCurrentGood);
+  const currentGood = useSelector(getCurrentGood);
   const storeDispatch = useDispatch();
   const currentItem = useSelector((state: any) =>
     state.goods.goods.find((item: IData) => item.uuid === params.uuid)
@@ -37,19 +36,20 @@ const GoodItemDetailed: FC = () => {
 
   const onSave = () => {
     if (params.add === 'add') {
-      storeDispatch(addItem(cGood));
+      storeDispatch(addItem(currentGood));
     } else {
-      storeDispatch(editItem(cGood));
+      storeDispatch(editItem(currentGood));
     }
     storeDispatch(clearCurrent());
   };
 
   useEffect(() => {
-    setEditable(true);
     if (location.search === '?edit') {
+      setEditable(true);
       storeDispatch(setCurrentItem(currentItem));
     }
     if (params.add === 'add') {
+      setEditable(true);
       storeDispatch(handleUuid(generateUuid(), 'uuid'));
       storeDispatch(setCurrentItem(currentItem));
     }
@@ -57,7 +57,11 @@ const GoodItemDetailed: FC = () => {
   return (
     <div className={style.detailed_wrapper}>
       <DetailedHeader editable={editable} name={currentItem?.name} onSave={onSave} />
-      <DetailedInfoForm item={cGood} edit={editable} handleInputChange={handleInputChange} />
+      <DetailedInfoForm
+        item={params.uuid && editable ? currentGood : currentItem}
+        edit={editable}
+        handleInputChange={handleInputChange}
+      />
     </div>
   );
 };
