@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import style from './pagination.module.scss';
 import pageButton from '../../assets/svg/pageButton.svg';
 
@@ -24,6 +24,7 @@ const Pagination: FC<IPagination> = ({
   const hasPrev = page !== 1;
   const hasNext = page === totalPages;
   const noResults = count === 0;
+
   return (
     <div className={style.pagination_wrapper}>
       <div className={style.pages_nums}>

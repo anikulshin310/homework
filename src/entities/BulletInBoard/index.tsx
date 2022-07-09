@@ -11,6 +11,7 @@ import usePagination from '../../hooks/usePagination';
 import { getGoodsData } from '../../store/Goods/selectors';
 import { deleteItem } from '../../store/Goods/actions';
 import GoodsSort from './GoodsSort';
+import { sortedGoods } from '../../utils/sortedGoods';
 
 const BulletInBoard: FC = () => {
   const navigate = useNavigate();
@@ -19,14 +20,16 @@ const BulletInBoard: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [listItems, setListItems] = useState(goodsData);
   const [sort, setSort] = useState(true);
-
-  useEffect(() => {
-    setListItems(goodsData);
-    console.log(listItems);
-  }, [goodsData]);
-
   const { totalPages, nextPage, prevPage, setPage, firstContentIndex, lastContentIndex, page } =
     usePagination({ contentPerPage: 8, count: listItems.length });
+  useEffect(() => {
+    setListItems(goodsData);
+  }, [goodsData]);
+  useEffect(() => {
+    if (page < 1) {
+      setPage(1);
+    }
+  }, [page, setPage]);
 
   // С филтрацией и пагинацией тебе тут поковырять надо, не всегда нормально работает. Советую еще поглядеть какие-нибудь реализации
   const filterItems = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,11 +38,8 @@ const BulletInBoard: FC = () => {
       item.name?.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
     );
     setListItems([...filteredItems]);
-    if (listItems.length < lastContentIndex) {
-      setPage(1);
-    }
+
     if (e.target.value.trim().length === 0) {
-      setPage(1);
       setListItems(goodsData);
       searchParams.delete('title');
       setSearchParams(searchParams);
@@ -48,14 +48,14 @@ const BulletInBoard: FC = () => {
     }
   };
 
-  /* const sortByName = (array:IData[],sort:boolean) => {
+  /*  const sortByName = (array: any, sort: boolean) => {
     if (sort) {
       const sorted = [...array].sort((a, b) =>
         a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0
       );
       setListItems(sorted);
     } else {
-      const sorted = [...array].sort((a: IData, b: IData) =>
+      const sorted = [...array].sort((a, b) =>
         a.name !== b.name ? (a.name < b.name ? 1 : -1) : 0
       );
       setListItems(sorted);
@@ -97,7 +97,7 @@ const BulletInBoard: FC = () => {
           count={listItems.length}
         />
       </div>
-      <GoodsSort onClick={() => console.log('fix sort')} />
+      <GoodsSort onClick={() => console.log('sort')} />
       <BulletInBoardItems
         items={listItems}
         modalMenuAction={modalMenuAction}

@@ -24,12 +24,6 @@ const GoodItemDetailed: FC = () => {
     state.goods.goods.find((item: IData) => item.uuid === params.uuid)
   );
   const [editable, setEditable] = useState(false);
-
-  // Стор обязательно вынести надо туда, где ему место, да и в целом подумать еще раз над вот этим подходом,
-  // что ты берешь данные из стора, как-то их обрабатываешь и создаешь на основании этого новый стор по сути
-  // (новый редьюсер). Можно тут без стора лучше обойдить в таком случае, а всю логику фильтрации сделать
-  // в селекторе, и вернуть нужное значение в компонент
-
   const handleInputChange = (e: any) => {
     storeDispatch(handleInputText(e.target.value, e.target.name));
   };
@@ -53,7 +47,7 @@ const GoodItemDetailed: FC = () => {
       storeDispatch(handleUuid(generateUuid(), 'uuid'));
       storeDispatch(setCurrentItem(currentItem));
     }
-  }, [params, location]);
+  }, [params, location, currentItem, storeDispatch]);
   return (
     <div className={style.detailed_wrapper}>
       <DetailedHeader editable={editable} name={currentItem?.name} onSave={onSave} />
