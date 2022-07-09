@@ -47,7 +47,6 @@ const GoodItemDetailed: FC = () => {
   useEffect(() => {
     setEditable(true);
     if (location.search === '?edit') {
-      /* storeDispatch(setCurrentItem(currentItem)); */
       storeDispatch(setCurrentItem(currentItem));
     }
     if (params.add === 'add') {
@@ -57,7 +56,7 @@ const GoodItemDetailed: FC = () => {
   }, [params, location]);
   return (
     <div className={style.detailed_wrapper}>
-      <DetailedHeader editable={editable} name={cGood?.name} onSave={onSave} />
+      <DetailedHeader editable={editable} name={currentItem?.name} onSave={onSave} />
       <DetailedInfoForm item={cGood} edit={editable} handleInputChange={handleInputChange} />
     </div>
   );
