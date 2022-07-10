@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import DetailedInput from './DetailedInput';
-import { getGoodsCategories, getGoodsData } from '../../../../store/Goods/selectors';
+import DetailedInput from './components/DetailedInput';
+import { getGoodsCategories } from '../../../../store/Goods/selectors';
 
-import DetailedInfoMap from '../YMaps';
+import DetailedInfoMap from './components/Map';
 import style from './DetailedInfoForm.module.scss';
+import Categories from './components/Categories';
+import Publicated from './components/Publicated';
+import Description from './components/Description';
+import LocationArea from './components/LocationArea';
 
 interface IDetailedInfoForm {
   item?: any;
   edit: boolean;
   handleInputChange?: (e: any) => void;
 }
-// Очень толстый компонент, надо пилить на подкомпоненты.
 const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange }) => {
-  const goodsData = useSelector(getGoodsData);
   const categories = useSelector(getGoodsCategories);
   return (
     <div className={style.form_wrapper}>
@@ -25,30 +27,12 @@ const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange
         onChange={handleInputChange}
       />
       <div className={style.row_two_items}>
-        {/* Вот эту штуку ниже точно можно в отдельный компонент вынести, 
-        куда флаг edit будет прокидывать и уже внутри компонента сравнивать. 
-        Ну и нужные пропсы прокинешь соовтетственно */}
-        {!edit ? (
-          <DetailedInput
-            title="Категория"
-            value={item?.category}
-            edit={edit}
-            name="category"
-            onChange={handleInputChange}
-          />
-        ) : (
-          <div className={style.form_input}>
-            <div className={style.form_title}>Категория</div>
-            <select value={item?.category} name="category" onChange={handleInputChange}>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
+        <Categories
+          handleInputChange={handleInputChange}
+          categories={categories}
+          itemCategory={item?.category}
+          edit={edit}
+        />
         <DetailedInput
           title="Стоимость"
           value={item?.price}
@@ -64,61 +48,22 @@ const DetailedInfoForm: FC<IDetailedInfoForm> = ({ item, edit, handleInputChange
         name="phone"
         onChange={handleInputChange}
       />
-      <div className={style.form_input}>
-        <div className={style.form_title}>Описание</div>
-        <textarea
-          disabled={!edit}
-          maxLength={3000}
-          value={item?.description}
-          name="description"
-          onChange={handleInputChange}
-        />
-      </div>
-      <DetailedInput type="file" title="Фотография" edit={edit} />
-      <DetailedInput
-        title="Местоположение"
-        value={item?.coordinates?.latitude}
+      <Description
         edit={edit}
-        name="coordinates"
-        onChange={handleInputChange}
+        itemDescription={item?.description}
+        handleInputChange={handleInputChange}
       />
-      {item?.coordinates?.longtitude ? (
-        <div className={style.form_input}>
-          <DetailedInfoMap
-            latitude={item?.coordinates?.latitude}
-            longtitude={item?.coordinates?.longtitude}
-          />
-        </div>
+
+      <DetailedInput type="file" title="Фотография" edit={edit} />
+
+      <LocationArea
+        edit={edit}
+        coordinates={item?.coordinates}
+        handleInputChange={handleInputChange}
+      />
+      {edit ? (
+        <Publicated isPublicated={item?.publicated} handleInputChange={handleInputChange} />
       ) : null}
-      <div className={style.form_input}>
-        <div className={style.form_title}>Публикация</div>
-        <div className={style.publicated}>
-          <label id="contactChoice1" htmlFor="contactChoice1">
-            <div className={style.radio}>
-              <input
-                type="radio"
-                id="contactChoice1"
-                name="publicated"
-                value="true"
-                defaultChecked={item?.publicated}
-                onChange={handleInputChange}
-              />
-              <div className={style.radio_title}>Показать</div>
-            </div>
-            <div className={style.radio}>
-              <input
-                type="radio"
-                id="contactChoice2"
-                name="publicated"
-                value="false"
-                defaultChecked={!item?.publicated}
-                onChange={handleInputChange}
-              />
-              <div className={style.radio_title}>Скрыть</div>
-            </div>
-          </label>
-        </div>
-      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import style from './DetailedInfoForm.module.scss';
+import style from '../DetailedInfoForm.module.scss';
 
 interface IDetailedInput {
   type?: string;
